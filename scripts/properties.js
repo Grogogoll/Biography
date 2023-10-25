@@ -96,6 +96,7 @@ let properties = [
 
 	['Classical Music Mode', false, 'classicalMusicMode'],
 	['Classical Music Mode Album Fallback', false, 'classicalAlbFallback'],
+	['Colour Line Dark', false, 'colLineDark'],
 	['Colour Swap', false, 'swapCol'],
 
 	['Cover Border [Dual Mode]', false, 'covBorderDual'],
@@ -232,6 +233,7 @@ let properties = [
 	['Image Smooth Transition', false, 'imgSmoothTrans'],
 	['Image Smooth Transition Level (%)', 92, 'transLevel'],
 
+	['Language [Menu] EN-0 ZH-CN-1 ZH-TW-2', 0, 'menuLanguage'],
 	['Layout', 0, 'style'],
 	['Layout Bio Mode', 0, 'bioMode'],
 	['Layout Bio', 0, 'bioStyle'],
@@ -275,7 +277,12 @@ let properties = [
 	['Overlay Gradient (%)', 10, 'overlayGradient'],
 	['Overlay Strength (%)', 84.5, 'overlayStrength'],
 	['Overlay Type', 0, 'typeOverlay'],
+
 	['Panel Active', true, 'panelActive'],
+	['Panel Focus Load Immediate', false, 'focusLoadImmediate'],
+	['Panel Focus Load Refresh Rate 200-3000 msec (Max)', 250, 'focusLoadRate'],
+	['Panel Focus Server Refresh Rate 1500-15000 msec (Max)', 5000, 'focusServerRate'],
+	['Panel Lookup Refresh Rate 1500-15000 msec (Max)', 1500, 'lookUpServerRate'],
 
 	['Photo Border [Dual Mode]', false, 'artBorderDual'],
 	['Photo Border [Image Only]', false, 'artBorderImgOnly'],
@@ -298,7 +305,8 @@ let properties = [
 	['Reflection Size (%)', 100, 'reflSize'],
 	['Reflection Strength (%)', 14.5, 'reflStrength'],
 
-	['Scrollbar Height Prefer Full', false, 'sbarFullHeight'],
+	['Scroll Position Bio', JSON.stringify({}), 'bioScrollPos'],
+	['Scroll Position Rev', JSON.stringify({}), 'revScrollPos'],
 	['Scroll Step 0-10 (0 = Page)', 3, 'scrollStep'],
 	['Scroll Smooth Duration 0-5000 msec (Max)', 500, 'durationScroll'],
 	['Scroll Touch Flick Duration 0-5000 msec (Max)', 3000, 'durationTouchFlick'],
@@ -310,6 +318,7 @@ let properties = [
 	['Scrollbar Button Type', 0, 'sbarButType'],
 	['Scrollbar Colour Grey-0 Blend-1', 1, 'sbarCol'],
 	['Scrollbar Grip MinHeight', Math.round(20 * $.scale), 'sbarGripHeight'],
+	['Scrollbar Height Prefer Full', false, 'sbarFullHeight'],
 	['Scrollbar Padding', 0, 'sbarPad'],
 	['Scrollbar Narrow Bar Width (0 = Auto)', 0, 'narrowSbarWidth'],
 	['Scrollbar Show', 1, 'sbarShow'],
@@ -346,6 +355,7 @@ let properties = [
 	['Subheading Track Style', 4, 'trackStyle'],
 	['Subheading Wikipedia Style', 5, 'wikiStyle'],
 
+	['Summary Compact', true, 'summaryCompact'],
 	['Summary Dates', true, 'summaryDate'],
 	['Summary Genres', true, 'summaryGenre'],
 	['Summary Locale', true, 'summaryLocale'],
@@ -362,6 +372,8 @@ let properties = [
 	['Text Reader Item Properties: Field Width', 0, 'fieldWidth'],
 	['Text Reader Item Properties: Show Line Dividers', true, 'lineDividers'],
 	['Text Reader Item Properties: Show Row Stripes', true, 'rowStripes'],
+	['Text Reader Nowplaying: Vertical Center', false, 'vCenter'],
+	['Text Reader Nowplaying: Horizontal Center', true, 'hCenter'],
 	['Text Reader 1 Use', true, 'useTxtReader0'],
 	['Text Reader 2 Use', true, 'useTxtReader1'],
 	['Text Reader 3 Use', true, 'useTxtReader2'],
@@ -370,6 +382,7 @@ let properties = [
 	['Text Reader 6 Use', true, 'useTxtReader5'],
 	['Text Reader 7 Use', true, 'useTxtReader6'],
 	['Text Reader 8 Use', true, 'useTxtReader7'],
+	['Text Reader Larger Sync Line', 0, 'largerSyncLyricLine'],
 	['Text Reader Lyrics Fade Height', 0, 'lyricsFadeHeight'],
 	['Text Reader Lyrics Font Style', 1, 'lyricsFontStyle'],
 	['Text Reader Lyrics Scroll Max Method', 0, 'lyricsScrollMaxMethod'],
@@ -380,7 +393,7 @@ let properties = [
 	['Text Reader 1 Name', 'lyrics', 'nmTxtReader0'],
 	['Text Reader 2 Name', 'lyrics', 'nmTxtReader1'],
 	['Text Reader 3 Name', 'lyrics', 'nmTxtReader2'],
-	['Text Reader 4 Name', '', 'nmTxtReader3'],
+	['Text Reader 4 Name', 'nowplaying', 'nmTxtReader3'],
 	['Text Reader 5 Name', 'lyrics', 'nmTxtReader4'],
 	['Text Reader 6 Name', 'lyrics', 'nmTxtReader5'],
 	['Text Reader 7 Name', 'lyrics', 'nmTxtReader6'],
@@ -388,7 +401,7 @@ let properties = [
 	['Text Reader 1 Item (field or full path)', '%profile%\\lyrics\\%BIO_ARTIST% - %BIO_TITLE%.lrc', 'pthTxtReader0'],
 	['Text Reader 2 Item (field or full path)', '$if3(%lyrics%,%syncedlyrics%,%unsynced lyrics%,%unsyncedlyrics%)', 'pthTxtReader1'],
 	['Text Reader 3 Item (field or full path)', '%profile%\\lyrics\\%BIO_ARTIST% - %BIO_TITLE%.txt', 'pthTxtReader2'],
-	['Text Reader 4 Item (field or full path)', '', 'pthTxtReader3'],
+	['Text Reader 4 Item (field or full path)', '%storage_folder%\\nowplaying.txt', 'pthTxtReader3'],
 	['Text Reader 5 Item (field or full path)', '%profile%\\lyrics\\%BIO_ARTIST% - %BIO_TITLE%.lrc', 'pthTxtReader4'],
 	['Text Reader 6 Item (field or full path)', '$if3(%lyrics%,%syncedlyrics%,%unsynced lyrics%,%unsyncedlyrics%)', 'pthTxtReader5'],
 	['Text Reader 7 Item (field or full path)', '%profile%\\lyrics\\%BIO_ARTIST% - %BIO_TITLE%.txt', 'pthTxtReader6'],
@@ -401,9 +414,14 @@ let properties = [
 	['Text Reader 6 Lyrics', true, 'lyricsTxtReader5'],
 	['Text Reader 7 Lyrics', true, 'lyricsTxtReader6'],
 	['Text Reader 8 Lyrics', false, 'lyricsTxtReader7'],
+	['Text Reader Lyrics/Nowplaying Drop Shadow Level', 0, 'dropShadowLevel'],
 	['Text Reader Synchronise With Lyrics Download', false, 'syncTxtReaderLyrics'],
 
 	['Theme', 0, 'theme'],
+	['Theme Background Image', false, 'themeBgImage'],
+	['Theme Colour', 3, 'themeColour'],
+	['Theme Light', false, 'themeLight'],
+	['Themed', false, 'themed'], // reserved: don't enable
 	['Touch Control', false, 'touchControl'],
 	['Track Review', 0, 'inclTrackRev'],
 	['Track Review Show Options', false, 'showTrackRevOptions'],
@@ -419,7 +437,7 @@ const ppt = new PanelProperties;
 ppt.init('auto', properties);
 properties = undefined;
 
-if (ppt.get('Update Properties', true)) {
+if (ppt.get('Update Properties', true)) { // ~22.7.22
 	ppt.nmTxtReader7 = 'item properties';
 	ppt.pthTxtReader7 = '%storage_folder%\\item_properties.json';
 	ppt.lyricsTxtReader7 = false;

@@ -9,6 +9,7 @@ Feature rich biography plug-in for [foobar2000](https://www.foobar2000.org)
 - Lyrics: synced and unsynced
 - Textreader
 - Item properties
+- Nowplaying display
 - Layout presets: top, left, right, bottom and overlay. Fully customisable with freestyle layouts
 - Themes: user interface, dark, blend, light and random
 - Custom colours and fonts
@@ -23,6 +24,9 @@ Feature rich biography plug-in for [foobar2000](https://www.foobar2000.org)
 - [Spider Monkey Panel 1.5.2+](https://www.foobar2000.org/components)
 - IE9 or later
 - [FontAwesome](https://github.com/FortAwesome/Font-Awesome/blob/fa-4/fonts/fontawesome-webfont.ttf?raw=true)
+- Segoe UI Symbol
+    - should be present on most windows systems
+    - if you're on win7 and symbols don't render properly you can download an updated version that includes newer symbols [here](https://www.stephanpringle.com/corrupted-segoe-ui-symbol-font/)
 
 ### INSTALLATION
 Install as a package as follows.
@@ -63,4 +67,3 @@ Standard grouping
 
 Alternative grouping
 ![item_properties_alternative_grouping](https://user-images.githubusercontent.com/35600752/179354332-31ef0545-4834-4837-bcbc-a86f912181e6.png)
-
